@@ -15,9 +15,9 @@ const client = new Client({
     ]
 })
 
-async function connect (){
+async function connect() {
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {keepAlive: true})
+        await mongoose.connect(process.env.MONGODB_URI, { keepAlive: true })
         console.log("Connected to database");
         new CommandHandler({
             client,
@@ -26,10 +26,10 @@ async function connect (){
             validationsPath: path.join(__dirname, 'validations'),
         })
         
-        
         client.login(process.env.TOKEN)
     } catch (error) {
         console.log(error);
     }
 }
+
 connect();
