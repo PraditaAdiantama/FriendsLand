@@ -16,7 +16,7 @@ function getRandomXp(min, max) {
  */
 
 module.exports = async (message, client) => {
-    if(!message.inGuild() || message.author.bot || cooldowns.has(message.author.id)) return
+    if(!message.inGuild() || message.author.bot) return
 
     const xpToGive = getRandomXp(5, 15)
 
