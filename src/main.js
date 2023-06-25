@@ -11,9 +11,9 @@ const client = new Client({
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.MessageContent
+        IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildPresences
     ]
-    
 })
 
 async function connect() {
@@ -26,7 +26,6 @@ async function connect() {
             eventsPath: path.join(__dirname, 'events'),
             validationsPath: path.join(__dirname, 'validations'),
         })
-        
         client.login(process.env.TOKEN)
     } catch (error) {
         console.log(error);
