@@ -1,7 +1,7 @@
 const { Client, Message } = require('discord.js')
 const Level = require('../../models/Level')
 const calculateLevelXp = require('../../utils/calculateLevelXp')
-const cooldowns = new Set()
+const dotenv = require('dotenv').config();
 
 function getRandomXp(min, max) {
     min = Math.ceil(min)
@@ -18,7 +18,7 @@ function getRandomXp(min, max) {
 module.exports = async (message, client) => {
     if(!message.inGuild() || message.author.bot) return
 
-    const xpToGive = getRandomXp(5, 15)
+    const xpToGive = getRandomXp(5, 10)
 
     const query = {
         userId: message.author.id,
@@ -35,18 +35,13 @@ module.exports = async (message, client) => {
                 level.xp = 0
                 level.level += 1
 
-                message.channel.send(`${message.member} you has level up to **${level.level}** level`)
+                client.channels.cache.get(process.env.LEVEL_CHANNEL_ID).send(`${message.member} you has level up to **${level.level}** level`)
             }
 
             await level.save().catch((e) => {
                 console.log(e);
                 return
             })
-
-            cooldowns.add(message.author.id)
-            setTimeout(() => {
-                cooldowns.delete(message.author.id)
-            }, 60000)
         }
 
         // if(!level)
@@ -56,12 +51,6 @@ module.exports = async (message, client) => {
                 guildId: message.guild.id,
                 xp: xpToGive
             })
-
-            await newLevel.save()
-            cooldowns.add(message.author.id)
-            setTimeout(() => {
-                cooldowns.delete(message.author.id)
-            }, 60000)
         }
     } catch (error) {
         console.log(error);
