@@ -2,4 +2,4 @@ node_modules
 .env
 discloud.config
 .vscode
-config.json
+./config.json
