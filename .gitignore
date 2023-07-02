@@ -2,4 +2,5 @@ node_modules
 .env
 discloud.config
 .vscode
-config.json
+./config.json
+friends-bot.zip

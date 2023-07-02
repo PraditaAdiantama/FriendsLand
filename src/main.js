@@ -5,15 +5,17 @@ const { Client, IntentsBitField } = require('discord.js')
 const { CommandHandler } = require('djs-commander')
 const path = require('path')
 const mongoose = require('mongoose')
+const voiceLevelXp = require('./utils/voiceLevelXp')
 
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.MessageContent
+        IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildPresences,
+        IntentsBitField.Flags.GuildVoiceStates
     ]
-    
 })
 
 async function connect() {
@@ -26,7 +28,9 @@ async function connect() {
             eventsPath: path.join(__dirname, 'events'),
             validationsPath: path.join(__dirname, 'validations'),
         })
-        
+
+        voiceLevelXp(client)
+
         client.login(process.env.TOKEN)
     } catch (error) {
         console.log(error);
