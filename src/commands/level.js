@@ -8,7 +8,6 @@ module.exports = {
             interaction.reply('Command hanya bisa di jalankan di server')
             return
         }
-        
         await interaction.deferReply()
 
         const mentionUserId = interaction.options.get('target-user')?.value
@@ -37,6 +36,5 @@ module.exports = {
         })
 
         let currentRank = allLevels.findIndex((lvl) => lvl.userId === targetUserId) + 1
-        
     }
 }
