@@ -25,7 +25,7 @@ module.exports = async (interaction, level, member) => {
     ctx.fillRect(0, 0, canvas.width, canvas.height / 4)
 
     ctx.fillStyle = 'green';
-    ctx.fillRect(0, canvas.height - 5, (canvas.width * level.xp) / calculateLevelXp(level.xp), 5)
+    ctx.fillRect(0, canvas.height - 5, Math.floor((canvas.width * level.xp) / calculateLevelXp(level.level)), 5)
 
     ctx.font = 'bold 30px Poppins';
     ctx.fillStyle = '#ffffff';
